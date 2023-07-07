@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/v1/products/**
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/v1/customers/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/v1/orders/**
+ribbon:
+  eureka:
+    enabled: false
+
+
+
